@@ -9,7 +9,7 @@ public interface AccountStatusDAO {
 	
 	public AccountStatus insertAccountStatus(String name);
 	
-	public void updateAccountStatus(AccountStatus p);
+	public void updateAccountStatus(AccountStatus as);
 	
 	public List<AccountStatus> selectAllAccountStatus();
 	
@@ -17,6 +17,6 @@ public interface AccountStatusDAO {
 	
 	public AccountStatus selectAccountStatusById(int id);
 	
-	public void deleteAccountStatus(AccountStatus p);
+	public void deleteAccountStatus(AccountStatus as);
 
 }

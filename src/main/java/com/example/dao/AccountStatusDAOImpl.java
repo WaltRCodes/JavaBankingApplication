@@ -31,7 +31,7 @@ public class AccountStatusDAOImpl implements AccountStatusDAO {
 			e.printStackTrace();
 		}
 		
-		return this.insertAccountStatus(name);
+		return this.selectAccountStatusByName(name);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class AccountStatusDAOImpl implements AccountStatusDAO {
 		// TODO Auto-generated method stub
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "UPDATE account_status SET type_name = ? WHERE type_id = ?";
+		String sql = "UPDATE account_status SET status_name = ? WHERE status_id = ?";
 		
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -62,7 +62,7 @@ public class AccountStatusDAOImpl implements AccountStatusDAO {
 		
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "SELECT * FROM products";
+		String sql = "SELECT * FROM account_status";
 		
 		try {
 			Statement s = conn.createStatement();
