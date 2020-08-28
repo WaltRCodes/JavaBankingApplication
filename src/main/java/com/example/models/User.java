@@ -1,5 +1,7 @@
 package com.example.models;
 
+import java.util.List;
+
 public class User {
 	private int userId;
 	private String username;
@@ -8,10 +10,11 @@ public class User {
 	private String lastName;
 	private String email;
 	private Role role;
+	private List<Account> accounts;
 	
 	  
 	public User(int userId, String username, String password, String firstName, String lastName, String email,
-			Role role) {
+			Role role, List<Account> accounts) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -20,7 +23,17 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.role = role;
+		this.accounts = accounts;
 	}
+	
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
+	}
+
 	public int getUserId() {
 		return userId;
 	}
