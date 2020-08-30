@@ -15,12 +15,12 @@ public interface AccountDAO {
 	
 	public List<Account> selectAllAccounts();
 	
-	public List<Account> selectAccountByOwner(int id);
+	public List<Account> selectAccountByOwner(User u);
 	
-	public Account selectAccountByStatus(AccountStatus as);
+	public List<Account> selectAccountByStatus(AccountStatus as);
 	
 	public Account selectAccountById(int id);
 	
-	public void deleteAccount(Account r);
+	public void deleteAccount(Account a);
 
 }
