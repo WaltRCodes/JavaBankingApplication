@@ -1,8 +1,10 @@
 package com.example;
 
+import com.example.dao.AccountDAOImpl;
 import com.example.dao.AccountStatusDAOImpl;
 import com.example.dao.AccountTypeDAOImpl;
 import com.example.dao.RoleDAOImpl;
+import com.example.dao.UserDAOImpl;
 
 public class Driver {
 
@@ -11,6 +13,8 @@ public class Driver {
 		AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
 		AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
 		RoleDAOImpl rdao = new RoleDAOImpl();
+		AccountDAOImpl adao = new AccountDAOImpl();
+		UserDAOImpl udao = new UserDAOImpl();
 //		rdao.insertRole("Admin");
 //		rdao.insertRole("Employee");
 //		rdao.insertRole("Standard");
@@ -21,9 +25,11 @@ public class Driver {
 //		asdao.insertAccountStatus("Denied");
 //		atdao.insertAccountType("Checking");
 //		atdao.insertAccountType("Savings");
-		System.out.println(asdao.selectAllAccountStatus());
-		System.out.println(atdao.selectAllAccountTypes());
-		System.out.println(rdao.selectAllRoles());
+//		System.out.println(asdao.selectAllAccountStatus());
+//		System.out.println(atdao.selectAllAccountTypes());
+//		System.out.println(rdao.selectAllRoles());
+		System.out.println(udao.selectAllUsers());
+		System.out.println(adao.selectAllAccounts());
 	}
 
 }

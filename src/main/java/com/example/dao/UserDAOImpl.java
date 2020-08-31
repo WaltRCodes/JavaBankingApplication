@@ -38,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		//return null;
-		return  this.selectUserByUserName(u);
+		return  this.selectUserByUserName(u.getUsername());
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User selectUserByUserName(User u) {
+	public User selectUserByUserName(String username) {
 		// TODO Auto-generated method stub
 		List<User> users = new ArrayList<>();
 		
@@ -101,7 +101,7 @@ public class UserDAOImpl implements UserDAO {
 			String sql = "SELECT * FROM users WHERE username = ? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, u.getUsername());
+			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			
 			//System.out.println(rs);

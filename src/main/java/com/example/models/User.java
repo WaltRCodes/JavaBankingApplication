@@ -25,7 +25,9 @@ public class User {
 		this.role = role;
 		this.accounts = accounts;
 	}
-	
+	public boolean loginCheck(String username, String password) {
+		return this.username.equals(username)&&this.password.equals(password);
+	}
 	public List<Account> getAccounts() {
 		return accounts;
 	}

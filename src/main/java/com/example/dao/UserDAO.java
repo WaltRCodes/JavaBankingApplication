@@ -12,7 +12,7 @@ public interface UserDAO {
 	
 	public List<User> selectAllUsers();
 	
-	public User selectUserByUserName(User u);
+	public User selectUserByUserName(String username);
 	
 	public User selectUserByEmail(User u);
 	
