@@ -86,9 +86,15 @@ public class Accounts extends HttpServlet {
 					pw.write("<li>");
 					pw.write(a.toString());
 					pw.write("<div>");
-					pw.write("<button>Withdraw</button>");
-					pw.write("<button>Deposit</button>");
-					pw.write("<button>Transfer</button>");
+					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"/Withdraw\" method=\"get\">\r\n" + 
+							"		<button type=\"submit\" >Withdraw</button>\r\n" + 
+							"	</form>");
+					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"/Deposit\" method=\"get\">\r\n" + 
+							"		<button type=\"submit\" >Deposit</button>\r\n" + 
+							"	</form>");
+					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"/Transfer\" method=\"get\">\r\n" + 
+							"		<button type=\"submit\" >Transfer</button>\r\n" + 
+							"	</form>");
 					pw.write("<div>");
 					pw.write("</li>");
 				}

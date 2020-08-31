@@ -57,7 +57,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Withdraw</servlet-name>
-    <url-pattern>/Withdraw</url-pattern>
+    <url-pattern>/Accounts/*</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
