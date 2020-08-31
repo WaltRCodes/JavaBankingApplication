@@ -1,23 +1,21 @@
 package com.example.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class logout
+ * Servlet implementation class AccountForm
  */
-public class Logout extends HttpServlet {
+public class AccountForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public AccountForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,10 +25,7 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		PrintWriter pw = response.getWriter();
-		pw.write("<p>You have logged out</p>");
-		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -38,7 +33,6 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getSession().invalidate();
 		doGet(request, response);
 	}
 

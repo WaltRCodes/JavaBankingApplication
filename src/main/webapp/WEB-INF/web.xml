@@ -109,4 +109,24 @@
     <servlet-name>Owner</servlet-name>
     <url-pattern>/Owner</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProfileSettings</display-name>
+    <servlet-name>ProfileSettings</servlet-name>
+    <servlet-class>com.example.servlets.ProfileSettings</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfileSettings</servlet-name>
+    <url-pattern>/ProfileSettings</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AccountForm</display-name>
+    <servlet-name>AccountForm</servlet-name>
+    <servlet-class>com.example.servlets.AccountForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountForm</servlet-name>
+    <url-pattern>/AccountForm</url-pattern>
+  </servlet-mapping>
 </web-app>

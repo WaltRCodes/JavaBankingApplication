@@ -5,6 +5,7 @@ import java.sql.Date;
 //should keep this in mind
 public class Account {
 
+	
 	private int accountId;
 	private double balance;
 	private AccountStatus status;
@@ -67,5 +68,9 @@ public class Account {
 		this.type = type;
 	}
 	
+	@Override
+	public String toString() {
+		return status + " " + type + " Account: $" + balance + " Created on" + creationDate;
+	}
 	
 }

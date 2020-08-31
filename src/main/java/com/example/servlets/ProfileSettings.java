@@ -1,23 +1,21 @@
 package com.example.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class logout
+ * Servlet implementation class ProfileSettings
  */
-public class Logout extends HttpServlet {
+public class ProfileSettings extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public ProfileSettings() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,10 +25,15 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		PrintWriter pw = response.getWriter();
-		pw.write("<p>You have logged out</p>");
-		
+		if(request.getSession(false)==null) {
+			System.out.println("There was no user logged into the session");
+			response.sendError(400,"There was no user logged into the session");
+		} else {
+			//response.sendRedirect("http://localhost:8080/SignInMaven/Success.html");
+			//PrintWriter pw = response.getWriter();
+			
+			request.getRequestDispatcher("/ProfileSettings.html").forward(request, response);
+		}
 	}
 
 	/**
@@ -38,7 +41,6 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getSession().invalidate();
 		doGet(request, response);
 	}
 

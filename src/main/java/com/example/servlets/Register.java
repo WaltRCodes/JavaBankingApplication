@@ -2,7 +2,6 @@ package com.example.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import com.example.dao.AccountDAOImpl;
 import com.example.dao.RoleDAOImpl;
 import com.example.dao.UserDAOImpl;
-import com.example.models.Account;
 import com.example.models.Role;
 import com.example.models.User;
 

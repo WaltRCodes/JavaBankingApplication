@@ -21,7 +21,7 @@ public class AccountDAOImpl implements AccountDAO {
 		// TODO Auto-generated method stub
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "INSERT INTO account (balance,account_type,account_status_id,owner_id,creation_date) values "
+		String sql = "INSERT INTO account (balance,account_type_id,account_status_id,owner_id,creation_date) values "
 				+ "(?,?,?,?,?)";
 		
 		try {
