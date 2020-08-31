@@ -62,6 +62,7 @@ public class Accounts extends HttpServlet {
 					"	</form>\r\n" + 
 					"</div>");
 			User user = (User) request.getSession(false).getAttribute("user");
+			System.out.println(request.getSession(false).getAttribute("user"));
 			List<Account> accounts = adao.selectAccountByOwner(user);
 			if(accounts==null) {
 				pw.write("<p>You dont have any accounts right now.</p>"
@@ -76,6 +77,12 @@ public class Accounts extends HttpServlet {
 						+ "<ul>");
 				//loop account logic
 				for(Account a: accounts) {
+					AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
+					AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
+					AccountStatus as = asdao.selectAccountStatusById(a.getStatus().getStatusId());
+					a.setStatus(as);
+					AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
+					a.setType(at);
 					pw.write("<li>");
 					pw.write(a.toString());
 					pw.write("<div>");
@@ -111,6 +118,13 @@ public class Accounts extends HttpServlet {
 			Account temp = new Account(-1, balanceinput, status,type , null);
 			User user = (User) request.getSession(false).getAttribute("user");
 			temp = adao.insertAccount(temp, user);
+			
+//			AccountStatus as = asdao.selectAccountStatusById(temp.getStatus().getStatusId());
+//			temp.setStatus(as);
+//			AccountType at = atdao.selectAccountTypeById(temp.getType().getTypeId());
+//			temp.setType(at);
+//			System.out.println(as.getStatus());
+//			System.out.println(at.getType());
 			//temp.setAccounts(adao.selectAccountByOwner(temp));
 //			if(users.size()>0) {
 //				for(User user : users ){{if(user.loginCheck(usernameinput,passwordinput)) allowed = true;}}

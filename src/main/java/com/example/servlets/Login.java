@@ -32,11 +32,11 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		if(request.getSession(false)!=null) {
-			request.getRequestDispatcher("/Accounts").forward(request, response);
-		} else {
+//		if(request.getSession(false)!=null) {
+//			request.getRequestDispatcher("/Accounts").forward(request, response);
+//		} else {
 			response.sendRedirect("http://localhost:8080/rocp-project/Login.html");
-		}
+		//}
 	}
 
 	/**

@@ -21,8 +21,8 @@ public class AccountDAOImpl implements AccountDAO {
 		// TODO Auto-generated method stub
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "INSERT INTO account (balance,account_type_id,account_status_id,owner_id,creation_date) values "
-				+ "(?,?,?,?,?)";
+		String sql = "INSERT INTO account (balance,account_type_id,account_status_id,owner_id) values "
+				+ "(?,?,?,?)";
 		
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -30,7 +30,6 @@ public class AccountDAOImpl implements AccountDAO {
 			ps.setInt(2, a.getType().getTypeId());
 			ps.setInt(3, a.getStatus().getStatusId());
 			ps.setInt(4, u.getUserId());
-			ps.setDate(5, a.getCreationDate());
 			ps.execute();
 			
 		} catch (SQLException e) {
