@@ -51,36 +51,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Withdraw</display-name>
-    <servlet-name>Withdraw</servlet-name>
-    <servlet-class>com.example.servlets.Withdraw</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Withdraw</servlet-name>
-    <url-pattern>/Accounts/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Deposit</display-name>
-    <servlet-name>Deposit</servlet-name>
-    <servlet-class>com.example.servlets.Deposit</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Deposit</servlet-name>
-    <url-pattern>/Deposit</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Transfer</display-name>
-    <servlet-name>Transfer</servlet-name>
-    <servlet-class>com.example.servlets.Transfer</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Transfer</servlet-name>
-    <url-pattern>/Transfer</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>Users</display-name>
     <servlet-name>Users</servlet-name>
     <servlet-class>com.example.servlets.Users</servlet-class>
@@ -128,5 +98,15 @@
   <servlet-mapping>
     <servlet-name>AccountForm</servlet-name>
     <url-pattern>/AccountForm</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModifyAccount</display-name>
+    <servlet-name>ModifyAccount</servlet-name>
+    <servlet-class>com.example.servlets.ModifyAccount</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyAccount</servlet-name>
+    <url-pattern>/Accounts/*</url-pattern>
   </servlet-mapping>
 </web-app>

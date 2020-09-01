@@ -80,19 +80,21 @@ public class Accounts extends HttpServlet {
 					AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
 					AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
 					AccountStatus as = asdao.selectAccountStatusById(a.getStatus().getStatusId());
+					System.out.println(a.getStatus().getStatusId());
 					a.setStatus(as);
 					AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
+					System.out.println(a.getType().getTypeId());
 					a.setType(at);
 					pw.write("<li>");
 					pw.write(a.toString());
 					pw.write("<div>");
-					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"/Withdraw\" method=\"get\">\r\n" + 
+					pw.write("<form action=\"/rocp-project/Accounts/Withdraw/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\" >Withdraw</button>\r\n" + 
 							"	</form>");
-					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"/Deposit\" method=\"get\">\r\n" + 
+					pw.write("<form action=\"/rocp-project/Accounts/Deposit/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\" >Deposit</button>\r\n" + 
 							"	</form>");
-					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"/Transfer\" method=\"get\">\r\n" + 
+					pw.write("<form action=\"/rocp-project/Accounts/Transfer/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\" >Transfer</button>\r\n" + 
 							"	</form>");
 					pw.write("<div>");
@@ -121,7 +123,8 @@ public class Accounts extends HttpServlet {
 			System.out.println(typeinput);
 			AccountStatus status = asdao.selectAccountStatusByName("Pending");
 			AccountType type = atdao.selectAccountTypeByName(typeinput);
-			Account temp = new Account(-1, balanceinput, status,type , null);
+			System.out.println(type.getType());
+			Account temp = new Account(-1, balanceinput,status,type, null);
 			User user = (User) request.getSession(false).getAttribute("user");
 			temp = adao.insertAccount(temp, user);
 			

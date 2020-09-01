@@ -77,8 +77,8 @@ public class AccountDAOImpl implements AccountDAO {
 			while(rs.next()) {
 				accounts.add(new Account(rs.getInt(1),
 						rs.getDouble(2),
-						new AccountStatus(rs.getInt(3),null),
-						new AccountType(rs.getInt(4),null),
+						new AccountStatus(rs.getInt(4),null),
+						new AccountType(rs.getInt(3),null),
 						rs.getDate(6)));
 				
 			}
@@ -108,8 +108,8 @@ public class AccountDAOImpl implements AccountDAO {
 			while(rs.next()) {
 				accounts.add(new Account(rs.getInt(1),
 						rs.getDouble(2),
-						new AccountStatus(rs.getInt(3),null),
-						new AccountType(rs.getInt(4),null),
+						new AccountStatus(rs.getInt(4),null),
+						new AccountType(rs.getInt(3),null),
 						rs.getDate(6)));
 				//System.out.println(rs.getString(2));
 			}
@@ -161,8 +161,8 @@ public class AccountDAOImpl implements AccountDAO {
 			while(rs.next()) {
 				accounts.add(new Account(rs.getInt(1),
 						rs.getDouble(2),
-						new AccountStatus(rs.getInt(3),null),
-						new AccountType(rs.getInt(4),null),
+						new AccountStatus(rs.getInt(4),null),
+						new AccountType(rs.getInt(3),null),
 						rs.getDate(6)));
 				//System.out.println(rs.getString(2));
 			}
@@ -194,8 +194,8 @@ public class AccountDAOImpl implements AccountDAO {
 			while(rs.next()) {
 				accounts.add(new Account(rs.getInt(1),
 						rs.getDouble(2),
-						new AccountStatus(rs.getInt(3),null),
-						new AccountType(rs.getInt(4),null),
+						new AccountStatus(rs.getInt(4),null),
+						new AccountType(rs.getInt(3),null),
 						rs.getDate(6)));
 				//System.out.println(rs.getString(2));
 			}
