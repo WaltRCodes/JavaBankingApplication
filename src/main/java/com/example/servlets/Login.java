@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.dao.AccountDAOImpl;
+import com.example.dao.RoleDAOImpl;
 import com.example.dao.UserDAOImpl;
 import com.example.models.User;
 
@@ -56,8 +58,13 @@ public class Login extends HttpServlet {
 				for(User user : users ){{if(user.loginCheck(usernameinput,passwordinput)) allowed = true;}}
 			}
 			if(allowed) {
+				RoleDAOImpl rdao = new RoleDAOImpl();
+				AccountDAOImpl adao = new AccountDAOImpl();
+				User u = udao.selectUserByUserName(usernameinput);
+				u.setAccounts(adao.selectAccountByOwner(u));
+				u.setRole(rdao.selectRoleById(u.getRole().getRoleId()));
 				HttpSession session = request.getSession(); //Either return the current session or create a new session.
-				session.setAttribute("user", udao.selectUserByUserName(usernameinput));
+				session.setAttribute("user", u);
 				response.sendRedirect("http://localhost:8080/rocp-project/Accounts");
 				
 			} else {

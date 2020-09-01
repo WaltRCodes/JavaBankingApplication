@@ -54,7 +54,13 @@ public class ModifyAccount extends HttpServlet {
 				String [] str = request.getRequestURI().split("/");
 				boolean allowed = false;
 				for(Account a: accounts) {
-					if(Integer.parseInt(str[4])==a.getAccountId()) {
+					AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
+					AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
+					AccountStatus as = asdao.selectAccountStatusById(a.getStatus().getStatusId());
+					a.setStatus(as);
+					AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
+					a.setType(at);
+					if(Integer.parseInt(str[4])==a.getAccountId()&&!a.getStatus().getStatus().equals("Pending")) {
 						allowed = true;
 						break;
 					}
@@ -73,7 +79,8 @@ public class ModifyAccount extends HttpServlet {
 						response.sendRedirect("http://localhost:8080/rocp-project/Accounts");
 					}
 				} else {
-					pw.write("<p>This account isn't yours</p>");
+					pw.write("<p>This account isn't yours or is still in pending approval</p>");
+					response.sendError(401,"The requested action is not permitted");
 			 }
 			}
 		}
