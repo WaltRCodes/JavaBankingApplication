@@ -53,8 +53,12 @@ public class Accounts extends HttpServlet {
 			//PrintWriter pw = response.getWriter();
 			PrintWriter pw = response.getWriter();
 			AccountDAOImpl adao = new AccountDAOImpl();
-			pw.write("<div>\r\n" + 
-					"	<form action=\"/rocp-project/ProfileSettings\" method=\"get\">\r\n" + 
+			pw.write("<div>\r\n"); 
+					pw.write("	<form action=\"/rocp-project/Users/\" method=\"get\">\r\n" + 
+					"		<button type=\"submit\">Users</button>\r\n" + 
+					"	</form>\r\n");
+					
+					pw.write("	<form action=\"/rocp-project/ProfileSettings\" method=\"get\">\r\n" + 
 					"		<button type=\"submit\">Profile</button>\r\n" + 
 					"	</form>\r\n" + 
 					"	<form action=\"/rocp-project/Logout\" method=\"post\">\r\n" + 
@@ -96,6 +100,9 @@ public class Accounts extends HttpServlet {
 							"	</form>");
 					pw.write("<form action=\"/rocp-project/Accounts/Transfer/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\" >Transfer</button>\r\n" + 
+							"	</form>");
+					pw.write("<form action=\"/rocp-project/Accounts/Delete/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
+							"		<button type=\"submit\" >Delete</button>\r\n" + 
 							"	</form>");
 					pw.write("<div>");
 					pw.write("</li>");

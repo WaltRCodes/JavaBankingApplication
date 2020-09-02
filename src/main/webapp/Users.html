@@ -2,9 +2,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Users</title>
 </head>
 <body>
-
+<form action="/rocp-project/Users" method="post">
+		Amount: <input type = "number" name  = "amount">
+		<button type="submit" >Submit</button>
+	</form>
+	<p>Find the user by Id</p>
+	<form action="/rocp-project/Users/" method="post">
+		UserId: <input type = "number" name  = "id">
+		<button type="submit" >Submit</button>
+	</form>
 </body>
 </html>

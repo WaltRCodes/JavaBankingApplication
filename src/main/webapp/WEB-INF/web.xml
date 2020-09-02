@@ -51,16 +51,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Users</display-name>
-    <servlet-name>Users</servlet-name>
-    <servlet-class>com.example.servlets.Users</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Users</servlet-name>
-    <url-pattern>/Users</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>Status</display-name>
     <servlet-name>Status</servlet-name>
     <servlet-class>com.example.servlets.Status</servlet-class>
@@ -108,5 +98,15 @@
   <servlet-mapping>
     <servlet-name>ModifyAccount</servlet-name>
     <url-pattern>/Accounts/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModifyUser</display-name>
+    <servlet-name>ModifyUser</servlet-name>
+    <servlet-class>com.example.servlets.ModifyUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyUser</servlet-name>
+    <url-pattern>/Users/*</url-pattern>
   </servlet-mapping>
 </web-app>

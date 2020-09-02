@@ -60,7 +60,8 @@ public class ModifyAccount extends HttpServlet {
 					a.setStatus(as);
 					AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
 					a.setType(at);
-					if(Integer.parseInt(str[4])==a.getAccountId()&&!a.getStatus().getStatus().equals("Pending")) {
+					if(Integer.parseInt(str[4])==a.getAccountId()) {
+						//&&!a.getStatus().getStatus().equals("Pending") add this back in later
 						allowed = true;
 						break;
 					}
@@ -75,6 +76,15 @@ public class ModifyAccount extends HttpServlet {
 						WithdrawController.withdraw(request, response, Integer.parseInt(str[4]));
 					} else if(str[3].contentEquals("Transfer")) {
 						TransferController.transfer(request, response, Integer.parseInt(str[4]));;
+					} else if(str[3].contentEquals("Delete")) {
+						Account a = adao.selectAccountById(Integer.parseInt(str[4]));
+						AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
+						AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
+						AccountStatus as = asdao.selectAccountStatusById(a.getStatus().getStatusId());
+						a.setStatus(as);
+						AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
+						a.setType(at);
+						System.out.print("Delete button was pressed for "+ a.toString());
 					} else {
 						response.sendRedirect("http://localhost:8080/rocp-project/Accounts");
 					}
