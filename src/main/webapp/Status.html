@@ -5,6 +5,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h3>This account belongs to [firstname,lastname,role]</h3>
+<form action="/rocp-project/Accounts/" method="post">
+		Balance: <input type = "number" name  = "balance" ><br>
+		<input type="radio" id="Checking" name="type" value="Checking">
+		<label for="Checking">Checking</label>
+		<input type="radio" id="Savings" name="type" value="Savings">
+		<label for="Savings">Savings</label><br>
+		<input type="radio" id="Pending" name="status" value="Pending">
+		<label for="Pending">Pending</label>
+		<input type="radio" id="Open" name="status" value="Open">
+		<label for="Open">Open</label>
+		<input type="radio" id="Closed" name="status" value="Closed" checked>
+		<label for="Closed">Closed</label>
+		<input type="radio" id="Denied" name="status" value="Denied">
+		<label for="Denied">Denied</label><br>
+		<button type="submit" >Submit</button>
+	</form>
 </body>
 </html>

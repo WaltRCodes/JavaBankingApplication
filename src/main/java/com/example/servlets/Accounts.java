@@ -58,6 +58,10 @@ public class Accounts extends HttpServlet {
 					"		<button type=\"submit\">Users</button>\r\n" + 
 					"	</form>\r\n");
 					
+					pw.write("	<form action=\"/rocp-project/Accounts/All\" method=\"get\">\r\n" + 
+							"		<button type=\"submit\">All Accounts</button>\r\n" + 
+							"	</form>\r\n");
+					
 					pw.write("	<form action=\"/rocp-project/ProfileSettings\" method=\"get\">\r\n" + 
 					"		<button type=\"submit\">Profile</button>\r\n" + 
 					"	</form>\r\n" + 

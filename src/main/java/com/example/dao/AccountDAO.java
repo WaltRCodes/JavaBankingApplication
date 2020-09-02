@@ -21,6 +21,8 @@ public interface AccountDAO {
 	
 	public Account selectAccountById(int id);
 	
+	public int getAccountOwner(Account a);
+	
 	public void deleteAccount(Account a);
 
 }

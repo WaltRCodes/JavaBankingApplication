@@ -46,12 +46,14 @@ public class AccountDAOImpl implements AccountDAO {
 		// TODO Auto-generated method stub
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "UPDATE account SET balance = ? WHERE account_id = ?";
+		String sql = "UPDATE account SET balance = ?, account_status_id = ?, account_type_id = ? WHERE account_id = ?";
 		
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setDouble(1, a.getBalance());
-			ps.setInt(2, a.getAccountId());
+			ps.setInt(2, a.getStatus().getStatusId());
+			ps.setInt(3, a.getType().getTypeId());
+			ps.setInt(4, a.getAccountId());
 			
 			ps.execute();
 			
@@ -208,6 +210,35 @@ public class AccountDAOImpl implements AccountDAO {
 			return null;
 		}
 		return accounts;
+	}
+
+	@Override
+	public int getAccountOwner(Account a) {
+		// TODO Auto-generated method stub
+		List<Integer> accounts = new ArrayList<>();
+		
+		try(Connection conn = ConnectionFactory.getConnection()){ 
+			String sql = "SELECT * FROM account WHERE account_id = ? ";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, a.getAccountId());
+			ResultSet rs = ps.executeQuery();
+			
+			//System.out.println(rs);
+			
+			while(rs.next()) {
+				accounts.add(rs.getInt(5));
+				//System.out.println(rs.getString(2));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(accounts.size()==0) {
+			return -1;
+		}
+		return accounts.get(0);
 	}
 
 }

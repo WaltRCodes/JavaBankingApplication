@@ -47,17 +47,17 @@ public class ProfileSettings extends HttpServlet {
 					"		Last Name: <input type = \"text\" name  = \"last\" placeholder = \"Last Name\" value=\""+user.getLastName()+"\">\r\n" + 
 					"		Email: <input type = \"email\" name  = \"email\" placeholder = \"email\" value=\""+user.getEmail()+"\">\r\n" 
 					);
-			if(!user.getRole().getRole().equals("Premium")) {
-				pw.write("		Upgrade to Premium account?\r\n" + 
-						"		<input type=\"radio\" id=\"Yes\" name=\"role\" value=\"Yes\">\r\n" + 
-						"		<label for=\"Yes\">Yes</label>\r\n" + 
-						"		<input type=\"radio\" id=\"No\" name=\"role\" value=\"No\">\r\n" + 
-						"		<label for=\"No\">No</label>\r\n" 
-						);
-			}
+//			if(!user.getRole().getRole().equals("Premium")) {
+//				pw.write("		Upgrade to Premium account?\r\n" + 
+//						"		<input type=\"radio\" id=\"Yes\" name=\"role\" value=\"Yes\">\r\n" + 
+//						"		<label for=\"Yes\">Yes</label>\r\n" + 
+//						"		<input type=\"radio\" id=\"No\" name=\"role\" value=\"No\">\r\n" + 
+//						"		<label for=\"No\">No</label>\r\n" 
+//						);
+//			}
 			pw.write("		<button type=\"submit\" >Submit</button>\r\n" + 
 						"	</form>");
-			
+			//for the delete make new accounts in closed status
 			//request.getRequestDispatcher("/ProfileSettings.html").forward(request, response);
 		}
 	}
@@ -74,14 +74,14 @@ public class ProfileSettings extends HttpServlet {
 		user.setFirstName(request.getParameter("first"));
 		user.setLastName(request.getParameter("last"));
 		user.setEmail(request.getParameter("email"));
-		if(!user.getRole().getRole().equals("Premium")) {
-			if(request.getParameter("role").equals("Yes")) {
-				//add payment option
-				RoleDAOImpl rdao = new RoleDAOImpl();
-				Role r = rdao.selectRoleByName("Premium");
-				user.setRole(r);
-			}
-		}
+//		if(!user.getRole().getRole().equals("Premium")) {
+//			if(request.getParameter("role").equals("Yes")) {
+//				//add payment option
+//				RoleDAOImpl rdao = new RoleDAOImpl();
+//				Role r = rdao.selectRoleByName("Premium");
+//				user.setRole(r);
+//			}
+//		}
 		UserDAOImpl udao = new UserDAOImpl();
 		udao.updateUser(user);
 		PrintWriter pw = response.getWriter();

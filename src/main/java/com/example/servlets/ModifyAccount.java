@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.controllers.AccountResultsController;
 import com.example.controllers.DepositController;
 import com.example.controllers.TransferController;
 import com.example.controllers.WithdrawController;
 import com.example.dao.AccountDAOImpl;
 import com.example.dao.AccountStatusDAOImpl;
 import com.example.dao.AccountTypeDAOImpl;
+import com.example.dao.RoleDAOImpl;
+import com.example.dao.UserDAOImpl;
 import com.example.models.Account;
 import com.example.models.AccountStatus;
 import com.example.models.AccountType;
@@ -52,7 +55,8 @@ public class ModifyAccount extends HttpServlet {
 				pw.write("<p>You dont have any accounts right now.</p>");
 			} else {
 				String [] str = request.getRequestURI().split("/");
-				boolean allowed = false;
+				//boolean allowed = false;
+				boolean allowed = true;
 				for(Account a: accounts) {
 					AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
 					AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
@@ -60,23 +64,39 @@ public class ModifyAccount extends HttpServlet {
 					a.setStatus(as);
 					AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
 					a.setType(at);
-					if(Integer.parseInt(str[4])==a.getAccountId()) {
-						//&&!a.getStatus().getStatus().equals("Pending") add this back in later
-						allowed = true;
-						break;
-					}
+//					if(Integer.parseInt(str[4])==a.getAccountId()) {
+//						//&&!a.getStatus().getStatus().equals("Pending") add this back in later
+//						allowed = true;
+//						break;
+//					}
+					//move this down
 				}
 			
 				if(allowed) {
 
-					System.out.println(str[4]);
+					System.out.println(str.length);
 					if(str[3].contentEquals("Deposit")) {
 						DepositController.deposit(request, response,Integer.parseInt(str[4]));
 					} else if(str[3].contentEquals("Withdraw")) {
 						WithdrawController.withdraw(request, response, Integer.parseInt(str[4]));
 					} else if(str[3].contentEquals("Transfer")) {
 						TransferController.transfer(request, response, Integer.parseInt(str[4]));;
-					} else if(str[3].contentEquals("Delete")) {
+					} else if(str[3].contentEquals("All")) {
+						//can only dwt if its not pending which can only be changed by admin on specific page which only they can see/ have access to
+						AccountResultsController.all(request, response);
+					} else if(str[3].contentEquals("Status")) {
+						//can only dwt if its not pending which can only be changed by admin on specific page which only they can see/ have access to
+						//check length
+						AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
+						AccountStatus status = asdao.selectAccountStatusById(Integer.parseInt(str[4]));
+						AccountResultsController.status(request, response, status);
+					} else if(str[3].contentEquals("Owner")) {
+						//can only dwt if its not pending which can only be changed by admin on specific page which only they can see/ have access to
+						//check length
+						UserDAOImpl udao = new UserDAOImpl();
+						User owner = udao.selectUserById(Integer.parseInt(str[4]));
+						AccountResultsController.owner(request, response, owner);
+					}  else if(str[3].contentEquals("Delete")) {
 						Account a = adao.selectAccountById(Integer.parseInt(str[4]));
 						AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
 						AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
@@ -86,7 +106,24 @@ public class ModifyAccount extends HttpServlet {
 						a.setType(at);
 						System.out.print("Delete button was pressed for "+ a.toString());
 					} else {
-						response.sendRedirect("http://localhost:8080/rocp-project/Accounts");
+						//length conditional
+						if(str.length>3) {
+							AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
+							AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
+							RoleDAOImpl rdao = new RoleDAOImpl();
+							UserDAOImpl udao = new UserDAOImpl();
+							Account a = adao.selectAccountById(Integer.parseInt(str[3]));
+							AccountStatus as = asdao.selectAccountStatusById(a.getStatus().getStatusId());
+							a.setStatus(as);
+							AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
+							a.setType(at);
+							User owner = udao.selectUserById(adao.getAccountOwner(a));
+							owner.setRole(rdao.selectRoleById(owner.getRole().getRoleId()));
+							AccountResultsController.update(request, response, a, owner);
+						} else {
+							response.sendRedirect("http://localhost:8080/rocp-project/Accounts");
+						}
+						
 					}
 				} else {
 					pw.write("<p>This account isn't yours or is still in pending approval</p>");
