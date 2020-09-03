@@ -100,7 +100,7 @@ public class AccountResultsController {
 					pw.write("<li>");
 					pw.write("<p>Owner: "+u.getFirstName()+" "+u.getLastName()+"</p>");
 					pw.write(a.toString());
-					pw.write("<div>");
+					pw.write("<div class=\"row\">");
 					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\" >Edit</button>\r\n" + 
 							"	</form>");
@@ -205,7 +205,7 @@ public class AccountResultsController {
 					pw.write("<li>");
 					pw.write("<p>Owner: "+u.getFirstName()+" "+u.getLastName()+"</p>");
 					pw.write(a.toString());
-					pw.write("<div>");
+					pw.write("<div class=\"row\">");
 					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\" >Edit</button>\r\n" + 
 							"	</form>");
@@ -310,7 +310,7 @@ public class AccountResultsController {
 					pw.write("<li>");
 					pw.write("<p>Owner: "+u.getFirstName()+" "+u.getLastName()+"</p>");
 					pw.write(a.toString());
-					pw.write("<div>");
+					pw.write("<div class=\"row\">");
 					pw.write("<form action=\"/rocp-project/Accounts/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\" >Edit</button>\r\n" + 
 							"	</form>");

@@ -3,8 +3,22 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Profile Settings</title>
+<style>
+.main {display: flex;
+flex-direction: column;
+align-items:center;}
+.main > *{
+padding-top:50px;}
+button{
+background-color:coral;
+border-style:none;
+border-radius:30px;
+color:white;
+padding:10px;}
+</style>
 </head>
 <body>
+<div class="main">
 <h1>Here is your Profile info</h1>
 <form action="/rocp-project/Register" method="post">
 		Username: <input type = "text" name  = "username" placeholder = "username">
@@ -19,5 +33,6 @@
 		<label for="No">No</label>
 		<button type="submit" >Submit</button>
 	</form>
+	</div>
 </body>
 </html>

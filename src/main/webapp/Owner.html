@@ -3,9 +3,22 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style>
+.main {display: flex;
+flex-direction: column;
+align-items:center;}
+.main > *{
+padding-top:50px;}
+button{
+background-color:coral;
+border-style:none;
+border-radius:30px;
+color:white;
+padding:10px;}
+</style>
 </head>
 <body>
-
+<div class="main">
 	<form action="/rocp-project/Accounts/" method="post">
 		Find account by Id: <input type = "number" name  = "id">
 		<button type="submit" >Submit</button>
@@ -28,5 +41,6 @@
 		Find the user by Owner: <input type = "number" name  = "userid">
 		<button type="submit" >Submit</button>
 	</form>
+	</div>
 </body>
 </html>

@@ -3,14 +3,29 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Failed Login</title>
+<style>
+.main {display: flex;
+flex-direction: column;
+align-items:center;}
+.main > *{
+padding-top:50px;}
+button{
+background-color:coral;
+border-style:none;
+border-radius:30px;
+color:white;
+padding:10px;}
+</style>
 </head>
 <body>
+<div class="main">
 	<p>Your username or password was incorrect</p>
 	<form action="/rocp-project/Login" method="post">
-		Username: <input type = "text" name  = "username" placeholder = "username">
-		Password: <input type = "password" name  = "password" placeholder = "password">
-		<button type="submit" >Submit</button>
+		Username: <input type = "text" name  = "username" placeholder = "username"><br>
+		Password: <input type = "password" name  = "password" placeholder = "password"><br>
+		<button type="submit" >Submit</button><br>
 	</form>
 	<a href="/rocp-project/Register">Click here if you dont have an account</a>
+	</div>
 </body>
 </html>

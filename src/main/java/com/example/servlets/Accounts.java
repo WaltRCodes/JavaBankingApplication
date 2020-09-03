@@ -49,9 +49,32 @@ public class Accounts extends HttpServlet {
 			PrintWriter pw = response.getWriter();
 			AccountDAOImpl adao = new AccountDAOImpl();
 			pw.write("<style>\r\n" + 
-					"body {background-color: coral;}\r\n" + 
+					"*{\r\n" + 
+					"padding:0;\r\n" + 
+					"margin:0;}"+
+					".main {display: flex;\r\n" + 
+					"flex-direction: column;\r\n" + 
+					"align-items:center;}\r\n" + 
+					".main > *{\r\n" + 
+					"padding-top:25px;}\r\n" 
+							+ ".row{\r\n" + 
+							"display:flex;\r\n" + 
+							"flex-direction:row;}\r\n" + 
+							".row>*{\r\n" + 
+							"padding-left:10px;}"+
+							"button{\r\n" + 
+							"background-color:coral;\r\n" + 
+							"border-style:none;\r\n" + 
+							"border-radius:30px;\r\n" + 
+							"color:white;\r\n" + 
+							"padding:10px;}" +
+							".navbar{\r\n" + 
+							"display:flex;\r\n" + 
+							"flex-direction:row;\r\n" + 
+							"background-color:coral;\r\n" + 
+							"width:100%;}"+
 					"</style>");
-			pw.write("<div>\r\n"); 
+			pw.write("<div class=\"navbar\">\r\n"); 
 			HttpSession session = request.getSession(); 
 			User u = (User) session.getAttribute("user");
 			if(u.getRole().getRole().contentEquals("Admin")||u.getRole().getRole().contentEquals("Employee")) {
@@ -73,6 +96,7 @@ public class Accounts extends HttpServlet {
 			User user = (User) request.getSession(false).getAttribute("user");
 			System.out.println(request.getSession(false).getAttribute("user"));
 			List<Account> accounts = adao.selectAccountByOwner(user);
+			pw.write("<div class=\"main\">\r\n"); 
 			if(accounts==null) {
 				pw.write("<p>You dont have any accounts right now.</p>"
 						+ "<form action=\"/rocp-project/Accounts.html\" method=\"get\">\r\n" + 
@@ -96,7 +120,7 @@ public class Accounts extends HttpServlet {
 					a.setType(at);
 					pw.write("<li>");
 					pw.write(a.toString());
-					pw.write("<div>");
+					pw.write("<div class=\"row\">");
 					pw.write("<form action=\"/rocp-project/Accounts/Withdraw/"+a.getAccountId()+"\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\" >Withdraw</button>\r\n" + 
 							"	</form>");
@@ -114,7 +138,7 @@ public class Accounts extends HttpServlet {
 				}
 				pw.write("</ul>");
 			}
-			
+			pw.write("</div>");
 			//request.getRequestDispatcher("/Accounts.html").forward(request, response);
 		}
 	}

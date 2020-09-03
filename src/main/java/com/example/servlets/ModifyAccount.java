@@ -48,8 +48,54 @@ public class ModifyAccount extends HttpServlet {
 		} else {
 			
 			PrintWriter pw = response.getWriter();
-			AccountDAOImpl adao = new AccountDAOImpl();
+			pw.write("<style>\r\n" + 
+					"*{\r\n" + 
+					"padding:0;\r\n" + 
+					"margin:0;}"+
+					".main {display: flex;\r\n" + 
+					"flex-direction: column;\r\n" + 
+					"align-items:center;}\r\n" + 
+					".main > *{\r\n" + 
+					"padding-top:25px;}\r\n" 
+							+ ".row{\r\n" + 
+							"display:flex;\r\n" + 
+							"flex-direction:row;}\r\n" + 
+							".row>*{\r\n" + 
+							"padding-left:10px;}"+
+							"button{\r\n" + 
+							"background-color:coral;\r\n" + 
+							"border-style:none;\r\n" + 
+							"border-radius:30px;\r\n" + 
+							"color:white;\r\n" + 
+							"padding:10px;}" +
+							".navbar{\r\n" + 
+							"display:flex;\r\n" + 
+							"flex-direction:row;\r\n" + 
+							"background-color:coral;\r\n" + 
+							"width:100%;}"+
+					"</style>");
+			pw.write("<div class=\"navbar\">\r\n"); 
+			//HttpSession session = request.getSession(); 
 			User user = (User) request.getSession(false).getAttribute("user");
+			if(user.getRole().getRole().contentEquals("Admin")||user.getRole().getRole().contentEquals("Employee")) {
+					pw.write("	<form action=\"/rocp-project/Users/\" method=\"get\">\r\n" + 
+					"		<button type=\"submit\">Users</button>\r\n" + 
+					"	</form>\r\n");
+			
+					pw.write("	<form action=\"/rocp-project/Accounts/All\" method=\"get\">\r\n" + 
+							"		<button type=\"submit\">All Accounts</button>\r\n" + 
+							"	</form>\r\n");
+			}	
+					pw.write("	<form action=\"/rocp-project/ProfileSettings\" method=\"get\">\r\n" + 
+					"		<button type=\"submit\">Profile</button>\r\n" + 
+					"	</form>\r\n" + 
+					"	<form action=\"/rocp-project/Logout\" method=\"post\">\r\n" + 
+					"		<button type=\"submit\" >Logout</button>\r\n" + 
+					"	</form>\r\n" + 
+					"</div>");
+			pw.write("<div class=\"main\">\r\n"); 
+			AccountDAOImpl adao = new AccountDAOImpl();
+			//User user = (User) request.getSession(false).getAttribute("user");
 			List<Account> accounts = adao.selectAccountByOwner(user);
 			if(accounts==null) {
 				pw.write("<p>You dont have any accounts right now.</p>");
@@ -79,11 +125,45 @@ public class ModifyAccount extends HttpServlet {
 
 					System.out.println(str.length);
 					if(str[3].contentEquals("Deposit")) {
-						DepositController.deposit(request, response,Integer.parseInt(str[4]));
+						Account a = adao.selectAccountById(Integer.parseInt(str[4]));
+						AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
+						AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
+						AccountStatus as = asdao.selectAccountStatusById(a.getStatus().getStatusId());
+						a.setStatus(as);
+						AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
+						a.setType(at);
+						if(a.getStatus().getStatus().equals("Open")) {
+							DepositController.deposit(request, response,Integer.parseInt(str[4]));
+						} else {
+							pw.write("<p>This account needs to approved before it can be used</p>");
+						}
+						
 					} else if(str[3].contentEquals("Withdraw")) {
+						Account a = adao.selectAccountById(Integer.parseInt(str[4]));
+						AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
+						AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
+						AccountStatus as = asdao.selectAccountStatusById(a.getStatus().getStatusId());
+						a.setStatus(as);
+						AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
+						a.setType(at);
+						if(a.getStatus().getStatus().equals("Open")) {
 						WithdrawController.withdraw(request, response, Integer.parseInt(str[4]));
+						} else {
+							pw.write("<p>This account needs to approved before it can be used</p>");
+						}
 					} else if(str[3].contentEquals("Transfer")) {
-						TransferController.transfer(request, response, Integer.parseInt(str[4]));;
+						Account a = adao.selectAccountById(Integer.parseInt(str[4]));
+						AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
+						AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
+						AccountStatus as = asdao.selectAccountStatusById(a.getStatus().getStatusId());
+						a.setStatus(as);
+						AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
+						a.setType(at);
+						if(a.getStatus().getStatus().equals("Open")) {
+						TransferController.transfer(request, response, Integer.parseInt(str[4]));
+						} else {
+							pw.write("<p>This account needs to approved before it can be used</p>");
+						}
 					} else if(str[3].contentEquals("All")&&access) {
 						//can only dwt if its not pending which can only be changed by admin on specific page which only they can see/ have access to
 						AccountResultsController.all(request, response);
@@ -135,6 +215,7 @@ public class ModifyAccount extends HttpServlet {
 					response.sendError(401,"The requested action is not permitted");
 			 }
 			}
+			pw.write("</div>");
 		}
 	}
 

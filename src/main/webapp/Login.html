@@ -4,15 +4,40 @@
 <meta charset="ISO-8859-1">
 <title>Login</title>
 <style>
-body {background-color: coral;}
+*{
+padding:0;
+margin:0;}
+.main {display: flex;
+flex-direction: column;
+align-items:center;}
+.main > *{
+padding-top:50px;}
+.row{
+display:flex;
+flex-direction:row;}
+.row>*{
+padding-left:10px;}
+button{
+background-color:coral;
+border-style:none;
+border-radius:30px;
+color:white;
+padding:10px;}
+.navbar{
+display:flex;
+flex-direction:row;
+background-color:coral;
+width:100%;}
 </style>
 </head>
 <body>
+<div class="main">
 	<form action="/rocp-project/Login" method="post">
 		Username: <input type = "text" name  = "username" placeholder = "username"><br>
 		Password: <input type = "password" name  = "password" placeholder = "password"><br>
 		<button type="submit" >Submit</button>
 	</form>
 	<a href="/rocp-project/Register">Click here if you dont have an account</a>
+</div>
 </body>
 </html>

@@ -3,6 +3,19 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>IFailed Account</title>
+<style>
+.main {display: flex;
+flex-direction: column;
+align-items:center;}
+.main > *{
+padding-top:50px;}
+button{
+background-color:coral;
+border-style:none;
+border-radius:30px;
+color:white;
+padding:10px;}
+</style>
 </head>
 <body>
 <p>There was an issue making your account</p>
@@ -14,13 +27,15 @@
 		<button type="submit" >Logout</button>
 	</form>
 </div>
+<div class="main">
 <form action="/rocp-project/Accounts" method="post">
-		Balance: <input type = "number" name  = "balance" >
+		Balance: <input type = "number" name  = "balance" ><br>
 		<input type="radio" id="Checking" name="type" value="Checking">
 		<label for="Checking">Checking</label>
 		<input type="radio" id="Savings" name="type" value="Savings">
-		<label for="Savings">Savings</label><br>
-		<button type="submit" >Submit</button>
+		<label for="Savings">Savings</label><br><br>
+		<button type="submit" >Submit</button><br>
 	</form>
+	</div>
 </body>
 </html>

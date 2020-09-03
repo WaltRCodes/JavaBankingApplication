@@ -70,7 +70,7 @@ public class Account {
 	
 	@Override
 	public String toString() {
-		return status.getStatus() + " " + type.getType() + " Account: $" + balance + " Created on " + creationDate.toString();
+		return status.getStatus() + " " + type.getType() + " Account#: "+accountId+" $" + balance + " Created on " + creationDate.toString();
 	}
 	
 }

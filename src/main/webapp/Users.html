@@ -3,8 +3,22 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Users</title>
+<style>
+.main {display: flex;
+flex-direction: column;
+align-items:center;}
+.main > *{
+padding-top:50px;}
+button{
+background-color:coral;
+border-style:none;
+border-radius:30px;
+color:white;
+padding:10px;}
+</style>
 </head>
 <body>
+<div class="main">
 <form action="/rocp-project/Users" method="post">
 		Amount: <input type = "number" name  = "amount">
 		<button type="submit" >Submit</button>
@@ -14,5 +28,6 @@
 		UserId: <input type = "number" name  = "id">
 		<button type="submit" >Submit</button>
 	</form>
+	</div>
 </body>
 </html>

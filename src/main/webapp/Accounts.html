@@ -3,9 +3,35 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Accounts</title>
+<style>
+*{
+padding:0;
+margin:0;}
+.main {display: flex;
+flex-direction: column;
+align-items:center;}
+.main > *{
+padding-top:50px;}
+.row{
+display:flex;
+flex-direction:row;}
+.row>*{
+padding-left:10px;}
+button{
+background-color:coral;
+border-style:none;
+border-radius:30px;
+color:white;
+padding:10px;}
+.navbar{
+display:flex;
+flex-direction:row;
+background-color:coral;
+width:100%;}
+</style>
 </head>
 <body>
-<div>
+<div class="navbar">
 	<form action="/rocp-project/ProfileSettings" method="post">
 		<button type="submit">Profile</button>
 	</form>
@@ -13,6 +39,7 @@
 		<button type="submit" >Logout</button>
 	</form>
 </div>
+<div class="main">
 <form action="/rocp-project/Accounts" method="post">
 		Balance: <input type = "number" name  = "balance" >
 		<input type="radio" id="Checking" name="type" value="Checking">
@@ -21,5 +48,6 @@
 		<label for="Savings">Savings</label><br>
 		<button type="submit" >Submit</button>
 	</form>
+	</div>
 </body>
 </html>

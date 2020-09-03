@@ -39,6 +39,52 @@ public class ModifyUser extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		HttpSession session = request.getSession(); 
 		User usersession = (User) session.getAttribute("user");
+		pw.write("<style>\r\n" + 
+				"*{\r\n" + 
+				"padding:0;\r\n" + 
+				"margin:0;}"+
+				".main {display: flex;\r\n" + 
+				"flex-direction: column;\r\n" + 
+				"align-items:center;}\r\n" + 
+				".main > *{\r\n" + 
+				"padding-top:25px;}\r\n" 
+						+ ".row{\r\n" + 
+						"display:flex;\r\n" + 
+						"flex-direction:row;}\r\n" + 
+						".row>*{\r\n" + 
+						"padding-left:10px;}"+
+						"button{\r\n" + 
+						"background-color:coral;\r\n" + 
+						"border-style:none;\r\n" + 
+						"border-radius:30px;\r\n" + 
+						"color:white;\r\n" + 
+						"padding:10px;}" +
+						".navbar{\r\n" + 
+						"display:flex;\r\n" + 
+						"flex-direction:row;\r\n" + 
+						"background-color:coral;\r\n" + 
+						"width:100%;}"+
+				"</style>");
+		pw.write("<div class=\"navbar\">\r\n"); 
+		//HttpSession session = request.getSession(); 
+		//User user = (User) request.getSession(false).getAttribute("user");
+		if(usersession.getRole().getRole().contentEquals("Admin")||usersession.getRole().getRole().contentEquals("Employee")) {
+				pw.write("	<form action=\"/rocp-project/Users/\" method=\"get\">\r\n" + 
+				"		<button type=\"submit\">Users</button>\r\n" + 
+				"	</form>\r\n");
+		
+				pw.write("	<form action=\"/rocp-project/Accounts/All\" method=\"get\">\r\n" + 
+						"		<button type=\"submit\">All Accounts</button>\r\n" + 
+						"	</form>\r\n");
+		}	
+				pw.write("	<form action=\"/rocp-project/ProfileSettings\" method=\"get\">\r\n" + 
+				"		<button type=\"submit\">Profile</button>\r\n" + 
+				"	</form>\r\n" + 
+				"	<form action=\"/rocp-project/Logout\" method=\"post\">\r\n" + 
+				"		<button type=\"submit\" >Logout</button>\r\n" + 
+				"	</form>\r\n" + 
+				"</div>");
+		pw.write("<div class=\"main\">\r\n"); 
 		if(request.getSession(false)==null) {
 			System.out.println("There was no user logged into the session");
 			response.sendError(400,"There was no user logged into the session");
@@ -106,6 +152,7 @@ public class ModifyUser extends HttpServlet {
 		}else {
 			pw.write("<p>You do not have permission to view this page</p>");
 		}
+		pw.write("</div>");
 	}
 
 	/**

@@ -37,6 +37,52 @@ public class ProfileSettings extends HttpServlet {
 			//response.sendRedirect("http://localhost:8080/SignInMaven/Success.html");
 			PrintWriter pw = response.getWriter();
 			User user = (User) request.getSession(false).getAttribute("user");
+			pw.write("<style>\r\n" + 
+					"*{\r\n" + 
+					"padding:0;\r\n" + 
+					"margin:0;}"+
+					".main {display: flex;\r\n" + 
+					"flex-direction: column;\r\n" + 
+					"align-items:center;}\r\n" + 
+					".main > *{\r\n" + 
+					"padding-top:25px;}\r\n" 
+							+ ".row{\r\n" + 
+							"display:flex;\r\n" + 
+							"flex-direction:row;}\r\n" + 
+							".row>*{\r\n" + 
+							"padding-left:10px;}"+
+							"button{\r\n" + 
+							"background-color:coral;\r\n" + 
+							"border-style:none;\r\n" + 
+							"border-radius:30px;\r\n" + 
+							"color:white;\r\n" + 
+							"padding:10px;}" +
+							".navbar{\r\n" + 
+							"display:flex;\r\n" + 
+							"flex-direction:row;\r\n" + 
+							"background-color:coral;\r\n" + 
+							"width:100%;}"+
+					"</style>");
+			pw.write("<div class=\"navbar\">\r\n"); 
+			//HttpSession session = request.getSession(); 
+			//User user = (User) request.getSession(false).getAttribute("user");
+			if(user.getRole().getRole().contentEquals("Admin")||user.getRole().getRole().contentEquals("Employee")) {
+					pw.write("	<form action=\"/rocp-project/Users/\" method=\"get\">\r\n" + 
+					"		<button type=\"submit\">Users</button>\r\n" + 
+					"	</form>\r\n");
+			
+					pw.write("	<form action=\"/rocp-project/Accounts/All\" method=\"get\">\r\n" + 
+							"		<button type=\"submit\">All Accounts</button>\r\n" + 
+							"	</form>\r\n");
+			}	
+					pw.write("	<form action=\"/rocp-project/ProfileSettings\" method=\"get\">\r\n" + 
+					"		<button type=\"submit\">Profile</button>\r\n" + 
+					"	</form>\r\n" + 
+					"	<form action=\"/rocp-project/Logout\" method=\"post\">\r\n" + 
+					"		<button type=\"submit\" >Logout</button>\r\n" + 
+					"	</form>\r\n" + 
+					"</div>");
+			pw.write("<div class=\"main\">\r\n"); 
 			pw.write("<h1>Here is your Profile info</h1>\r\n" + 
 					"<form action=\"/rocp-project/ProfileSettings\" method=\"post\">\r\n" + 
 					"		Username: <input type = \"text\" name  = \"username\" placeholder = \"username\" value=\""+user.getUsername()+"\"><br>\r\n" + 
@@ -55,6 +101,7 @@ public class ProfileSettings extends HttpServlet {
 //			}
 			pw.write("		<button type=\"submit\" >Submit</button>\r\n" + 
 						"	</form>");
+			pw.write("</div>");
 			//for the delete make new accounts in closed status
 			//request.getRequestDispatcher("/ProfileSettings.html").forward(request, response);
 		}
