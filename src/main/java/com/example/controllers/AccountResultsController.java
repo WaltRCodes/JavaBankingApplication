@@ -26,7 +26,6 @@ public class AccountResultsController {
 		AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
 		RoleDAOImpl rdao = new RoleDAOImpl();
 		UserDAOImpl udao = new UserDAOImpl();
-		String [] str = request.getRequestURI().split("/");
 		if(request.getMethod().equals("POST")) {
 			if(request.getParameter("id")!=null) {
 				response.sendRedirect("http://localhost:8080/rocp-project/Accounts/"+request.getParameter("id"));
@@ -132,7 +131,6 @@ public class AccountResultsController {
 		AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
 		RoleDAOImpl rdao = new RoleDAOImpl();
 		UserDAOImpl udao = new UserDAOImpl();
-		String [] str = request.getRequestURI().split("/");
 		if(request.getMethod().equals("POST")) {
 			if(request.getParameter("id")!=null) {
 				response.sendRedirect("http://localhost:8080/rocp-project/Accounts/"+request.getParameter("id"));
@@ -165,9 +163,9 @@ public class AccountResultsController {
 					"	<form action=\"/rocp-project/Accounts/All\" method=\"post\">\r\n" + 
 					"		Find account by Status: \r\n" + 
 					"		<input type=\"radio\" id=\"Pending\" name=\"status\" value=\"Pending\">\r\n" + 
-					"		<label for=\"Pending\">Pending</label><br>\r\n" + 
+					"		<label for=\"Pending\">Pending</label>\r\n" + 
 					"		<input type=\"radio\" id=\"Open\" name=\"status\" value=\"Open\">\r\n" + 
-					"		<label for=\"Open\">Open</label><br>\r\n" + 
+					"		<label for=\"Open\">Open</label>\r\n" + 
 					"		<input type=\"radio\" id=\"Closed\" name=\"status\" value=\"Closed\">\r\n" + 
 					"		<label for=\"Closed\">Closed</label>\r\n" + 
 					"		<input type=\"radio\" id=\"Denied\" name=\"status\" value=\"Denied\">\r\n" + 
@@ -238,7 +236,6 @@ public class AccountResultsController {
 		AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
 		RoleDAOImpl rdao = new RoleDAOImpl();
 		UserDAOImpl udao = new UserDAOImpl();
-		String [] str = request.getRequestURI().split("/");
 		if(request.getMethod().equals("POST")) {
 			if(request.getParameter("id")!=null) {
 				response.sendRedirect("http://localhost:8080/rocp-project/Accounts/"+request.getParameter("id"));
@@ -271,9 +268,9 @@ public class AccountResultsController {
 					"	<form action=\"/rocp-project/Accounts/All\" method=\"post\">\r\n" + 
 					"		Find account by Status: \r\n" + 
 					"		<input type=\"radio\" id=\"Pending\" name=\"status\" value=\"Pending\">\r\n" + 
-					"		<label for=\"Pending\">Pending</label><br>\r\n" + 
+					"		<label for=\"Pending\">Pending</label>\r\n" + 
 					"		<input type=\"radio\" id=\"Open\" name=\"status\" value=\"Open\">\r\n" + 
-					"		<label for=\"Open\">Open</label><br>\r\n" + 
+					"		<label for=\"Open\">Open</label>\r\n" + 
 					"		<input type=\"radio\" id=\"Closed\" name=\"status\" value=\"Closed\">\r\n" + 
 					"		<label for=\"Closed\">Closed</label>\r\n" + 
 					"		<input type=\"radio\" id=\"Denied\" name=\"status\" value=\"Denied\">\r\n" + 
@@ -342,9 +339,6 @@ public class AccountResultsController {
 		AccountDAOImpl adao = new AccountDAOImpl();
 		AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
 		AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
-		RoleDAOImpl rdao = new RoleDAOImpl();
-		UserDAOImpl udao = new UserDAOImpl();
-		String [] str = request.getRequestURI().split("/");
 		if(request.getMethod().equals("POST")) {
 //			List<User> users = udao.selectAllUsers();
 //			boolean allowed = false;

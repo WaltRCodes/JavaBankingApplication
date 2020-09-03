@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.dao.RoleDAOImpl;
 import com.example.dao.UserDAOImpl;
-import com.example.models.Role;
 import com.example.models.User;
 
 /**
@@ -41,11 +39,11 @@ public class ProfileSettings extends HttpServlet {
 			User user = (User) request.getSession(false).getAttribute("user");
 			pw.write("<h1>Here is your Profile info</h1>\r\n" + 
 					"<form action=\"/rocp-project/ProfileSettings\" method=\"post\">\r\n" + 
-					"		Username: <input type = \"text\" name  = \"username\" placeholder = \"username\" value=\""+user.getUsername()+"\">\r\n" + 
-					"		Password: <input type = \"password\" name  = \"password\" placeholder = \"password\" value=\""+user.getPassword()+"\">\r\n" + 
-					"		First Name: <input type = \"text\" name  = \"first\" placeholder = \"First Name\" value=\""+user.getFirstName()+"\">\r\n" + 
-					"		Last Name: <input type = \"text\" name  = \"last\" placeholder = \"Last Name\" value=\""+user.getLastName()+"\">\r\n" + 
-					"		Email: <input type = \"email\" name  = \"email\" placeholder = \"email\" value=\""+user.getEmail()+"\">\r\n" 
+					"		Username: <input type = \"text\" name  = \"username\" placeholder = \"username\" value=\""+user.getUsername()+"\"><br>\r\n" + 
+					"		Password: <input type = \"password\" name  = \"password\" placeholder = \"password\" value=\""+user.getPassword()+"\"><br>\r\n" + 
+					"		First Name: <input type = \"text\" name  = \"first\" placeholder = \"First Name\" value=\""+user.getFirstName()+"\"><br>\r\n" + 
+					"		Last Name: <input type = \"text\" name  = \"last\" placeholder = \"Last Name\" value=\""+user.getLastName()+"\"><br>\r\n" + 
+					"		Email: <input type = \"email\" name  = \"email\" placeholder = \"email\" value=\""+user.getEmail()+"\"><br>\r\n" 
 					);
 //			if(!user.getRole().getRole().equals("Premium")) {
 //				pw.write("		Upgrade to Premium account?\r\n" + 

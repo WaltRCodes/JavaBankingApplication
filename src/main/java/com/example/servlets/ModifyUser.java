@@ -8,19 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.example.controllers.DepositController;
-import com.example.controllers.TransferController;
 import com.example.controllers.UserController;
-import com.example.controllers.WithdrawController;
 import com.example.dao.AccountDAOImpl;
-import com.example.dao.AccountStatusDAOImpl;
-import com.example.dao.AccountTypeDAOImpl;
 import com.example.dao.RoleDAOImpl;
 import com.example.dao.UserDAOImpl;
 import com.example.models.Account;
-import com.example.models.AccountStatus;
-import com.example.models.AccountType;
 import com.example.models.User;
 
 /**
@@ -42,11 +36,14 @@ public class ModifyUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter pw = response.getWriter();
+		HttpSession session = request.getSession(); 
+		User usersession = (User) session.getAttribute("user");
 		if(request.getSession(false)==null) {
 			System.out.println("There was no user logged into the session");
 			response.sendError(400,"There was no user logged into the session");
-		} else {
-			PrintWriter pw = response.getWriter();
+		} else if(usersession.getRole().getRole().equals("Admin")||usersession.getRole().getRole().equals("Employee")) {
+			
 			UserDAOImpl udao = new UserDAOImpl();
 			AccountDAOImpl adao = new AccountDAOImpl();
 			RoleDAOImpl rdao = new RoleDAOImpl();
@@ -93,13 +90,21 @@ public class ModifyUser extends HttpServlet {
 					user.setRole(rdao.selectRoleById(user.getRole().getRoleId()));
 					user.setAccounts(adao.selectAccountByOwner(user));
 					System.out.println("Delete button was pressed for "+ user.getUsername());
-//					udao.deleteUser(user);
-//					response.sendRedirect("http://localhost:8080/rocp-project/Users/");
+					if(user.getAccounts()!=null) {
+						for(Account a: user.getAccounts()) {
+							adao.deleteAccount(a);
+						}
+					}
+					
+					udao.deleteUser(user);
+					response.sendRedirect("http://localhost:8080/rocp-project/Users/");
 				}  else {
 					response.sendRedirect("http://localhost:8080/rocp-project/Users/");
 				}	
 			 //}
 			}
+		}else {
+			pw.write("<p>You do not have permission to view this page</p>");
 		}
 	}
 

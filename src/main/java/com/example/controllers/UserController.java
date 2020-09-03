@@ -6,14 +6,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.dao.AccountDAOImpl;
-import com.example.dao.AccountStatusDAOImpl;
-import com.example.dao.AccountTypeDAOImpl;
 import com.example.dao.RoleDAOImpl;
 import com.example.dao.UserDAOImpl;
-import com.example.models.Account;
-import com.example.models.AccountStatus;
-import com.example.models.AccountType;
 import com.example.models.Role;
 import com.example.models.User;
 
@@ -29,14 +23,14 @@ public class UserController {
 				u.setFirstName(request.getParameter("first"));
 				u.setLastName(request.getParameter("last"));
 				u.setEmail(request.getParameter("email"));
-				if(!u.getRole().getRole().equals("Premium")) {
-					if(request.getParameter("role").equals("Yes")) {
-						//add payment option
-						RoleDAOImpl rdao = new RoleDAOImpl();
-						Role r = rdao.selectRoleByName("Premium");
-						u.setRole(r);
-					}
-				}
+//				if(!u.getRole().getRole().equals("Premium")) {
+//					if(request.getParameter("role").equals("Yes")) {
+//						//add payment option
+//						RoleDAOImpl rdao = new RoleDAOImpl();
+//						Role r = rdao.selectRoleByName("Premium");
+//						u.setRole(r);
+//					}
+//				}
 				UserDAOImpl udao = new UserDAOImpl();
 				udao.updateUser(u);
 				
@@ -54,20 +48,20 @@ public class UserController {
 				
 				pw.write("<h1>Here is your Profile info</h1>\r\n" + 
 						"<form action=\"/rocp-project/Users/"+str[3]+"\" method=\"post\">\r\n" + 
-						"		Username: <input type = \"text\" name  = \"username\" placeholder = \"username\" value=\""+u.getUsername()+"\">\r\n" + 
-						"		Password: <input type = \"password\" name  = \"password\" placeholder = \"password\" value=\""+u.getPassword()+"\">\r\n" + 
-						"		First Name: <input type = \"text\" name  = \"first\" placeholder = \"First Name\" value=\""+u.getFirstName()+"\">\r\n" + 
-						"		Last Name: <input type = \"text\" name  = \"last\" placeholder = \"Last Name\" value=\""+u.getLastName()+"\">\r\n" + 
-						"		Email: <input type = \"email\" name  = \"email\" placeholder = \"email\" value=\""+u.getEmail()+"\">\r\n" 
+						"		Username: <input type = \"text\" name  = \"username\" placeholder = \"username\" value=\""+u.getUsername()+"\"><br>\r\n" + 
+						"		Password: <input type = \"password\" name  = \"password\" placeholder = \"password\" value=\""+u.getPassword()+"\"><br>\r\n" + 
+						"		First Name: <input type = \"text\" name  = \"first\" placeholder = \"First Name\" value=\""+u.getFirstName()+"\"><br>\r\n" + 
+						"		Last Name: <input type = \"text\" name  = \"last\" placeholder = \"Last Name\" value=\""+u.getLastName()+"\"><br>\r\n" + 
+						"		Email: <input type = \"email\" name  = \"email\" placeholder = \"email\" value=\""+u.getEmail()+"\"><br>\r\n" 
 						);
-				if(!u.getRole().getRole().equals("Premium")) {
-					pw.write("		Upgrade to Premium account?\r\n" + 
-							"		<input type=\"radio\" id=\"Yes\" name=\"role\" value=\"Yes\">\r\n" + 
-							"		<label for=\"Yes\">Yes</label>\r\n" + 
-							"		<input type=\"radio\" id=\"No\" name=\"role\" value=\"No\">\r\n" + 
-							"		<label for=\"No\">No</label>\r\n" 
-							);
-				}
+//				if(!u.getRole().getRole().equals("Premium")) {
+//					pw.write("		Upgrade to Premium account?\r\n" + 
+//							"		<input type=\"radio\" id=\"Yes\" name=\"role\" value=\"Yes\">\r\n" + 
+//							"		<label for=\"Yes\">Yes</label>\r\n" + 
+//							"		<input type=\"radio\" id=\"No\" name=\"role\" value=\"No\">\r\n" + 
+//							"		<label for=\"No\">No</label>\r\n" 
+//							);
+//				}
 				pw.write("		<button type=\"submit\" >Submit</button>\r\n" + 
 							"	</form>");
 				

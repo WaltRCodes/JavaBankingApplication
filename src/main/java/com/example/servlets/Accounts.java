@@ -2,8 +2,6 @@ package com.example.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,12 +13,9 @@ import javax.servlet.http.HttpSession;
 import com.example.dao.AccountDAOImpl;
 import com.example.dao.AccountStatusDAOImpl;
 import com.example.dao.AccountTypeDAOImpl;
-import com.example.dao.RoleDAOImpl;
-import com.example.dao.UserDAOImpl;
 import com.example.models.Account;
 import com.example.models.AccountStatus;
 import com.example.models.AccountType;
-import com.example.models.Role;
 import com.example.models.User;
 
 /**
@@ -53,15 +48,21 @@ public class Accounts extends HttpServlet {
 			//PrintWriter pw = response.getWriter();
 			PrintWriter pw = response.getWriter();
 			AccountDAOImpl adao = new AccountDAOImpl();
+			pw.write("<style>\r\n" + 
+					"body {background-color: coral;}\r\n" + 
+					"</style>");
 			pw.write("<div>\r\n"); 
+			HttpSession session = request.getSession(); 
+			User u = (User) session.getAttribute("user");
+			if(u.getRole().getRole().contentEquals("Admin")||u.getRole().getRole().contentEquals("Employee")) {
 					pw.write("	<form action=\"/rocp-project/Users/\" method=\"get\">\r\n" + 
 					"		<button type=\"submit\">Users</button>\r\n" + 
 					"	</form>\r\n");
-					
+			
 					pw.write("	<form action=\"/rocp-project/Accounts/All\" method=\"get\">\r\n" + 
 							"		<button type=\"submit\">All Accounts</button>\r\n" + 
 							"	</form>\r\n");
-					
+			}	
 					pw.write("	<form action=\"/rocp-project/ProfileSettings\" method=\"get\">\r\n" + 
 					"		<button type=\"submit\">Profile</button>\r\n" + 
 					"	</form>\r\n" + 

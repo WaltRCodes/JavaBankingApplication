@@ -63,6 +63,7 @@ public class Register extends HttpServlet {
 			User temp = new User(-1, usernameinput, passwordinput,  firstname, lastname, email,
 					r, new ArrayList<>());
 			temp = udao.insertUser(temp);
+			temp.setRole(rdao.selectRoleById(temp.getRole().getRoleId()));
 			temp.setAccounts(adao.selectAccountByOwner(temp));
 //			if(users.size()>0) {
 //				for(User user : users ){{if(user.loginCheck(usernameinput,passwordinput)) allowed = true;}}

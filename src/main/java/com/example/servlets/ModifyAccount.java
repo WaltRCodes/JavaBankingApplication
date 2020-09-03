@@ -56,7 +56,7 @@ public class ModifyAccount extends HttpServlet {
 			} else {
 				String [] str = request.getRequestURI().split("/");
 				//boolean allowed = false;
-				boolean allowed = true;
+				//boolean allowed = true;
 				for(Account a: accounts) {
 					AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
 					AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
@@ -71,8 +71,11 @@ public class ModifyAccount extends HttpServlet {
 //					}
 					//move this down
 				}
-			
-				if(allowed) {
+				boolean access = false;
+				if(user.getRole().getRole().contentEquals("Admin")||user.getRole().getRole().contentEquals("Employee")) {
+					access = true;
+				}
+				try {
 
 					System.out.println(str.length);
 					if(str[3].contentEquals("Deposit")) {
@@ -81,16 +84,16 @@ public class ModifyAccount extends HttpServlet {
 						WithdrawController.withdraw(request, response, Integer.parseInt(str[4]));
 					} else if(str[3].contentEquals("Transfer")) {
 						TransferController.transfer(request, response, Integer.parseInt(str[4]));;
-					} else if(str[3].contentEquals("All")) {
+					} else if(str[3].contentEquals("All")&&access) {
 						//can only dwt if its not pending which can only be changed by admin on specific page which only they can see/ have access to
 						AccountResultsController.all(request, response);
-					} else if(str[3].contentEquals("Status")) {
+					} else if(str[3].contentEquals("Status")&&access) {
 						//can only dwt if its not pending which can only be changed by admin on specific page which only they can see/ have access to
 						//check length
 						AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
 						AccountStatus status = asdao.selectAccountStatusById(Integer.parseInt(str[4]));
 						AccountResultsController.status(request, response, status);
-					} else if(str[3].contentEquals("Owner")) {
+					} else if(str[3].contentEquals("Owner")&&access) {
 						//can only dwt if its not pending which can only be changed by admin on specific page which only they can see/ have access to
 						//check length
 						UserDAOImpl udao = new UserDAOImpl();
@@ -105,6 +108,8 @@ public class ModifyAccount extends HttpServlet {
 						AccountType at = atdao.selectAccountTypeById(a.getType().getTypeId());
 						a.setType(at);
 						System.out.print("Delete button was pressed for "+ a.toString());
+						adao.deleteAccount(a);
+						response.sendRedirect("http://localhost:8080/rocp-project/Accounts");
 					} else {
 						//length conditional
 						if(str.length>3) {
@@ -125,8 +130,8 @@ public class ModifyAccount extends HttpServlet {
 						}
 						
 					}
-				} else {
-					pw.write("<p>This account isn't yours or is still in pending approval</p>");
+				} catch (Exception e) {
+					pw.write("<p>The resource you are looking for is not available</p>");
 					response.sendError(401,"The requested action is not permitted");
 			 }
 			}
