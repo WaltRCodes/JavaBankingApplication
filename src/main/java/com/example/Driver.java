@@ -9,7 +9,7 @@ import com.example.dao.UserDAOImpl;
 public class Driver {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// This was the testing file for various data access objects
 //		AccountStatusDAOImpl asdao = new AccountStatusDAOImpl();
 //		AccountTypeDAOImpl atdao = new AccountTypeDAOImpl();
 //		RoleDAOImpl rdao = new RoleDAOImpl();

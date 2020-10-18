@@ -14,9 +14,10 @@ public class ConnectionFactory {
 		Connection conn = null;
 		
 		try {
+			//This lie uses DriverManager to try to connect to the postgresql database
 			conn = DriverManager.getConnection(url,username,password);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
