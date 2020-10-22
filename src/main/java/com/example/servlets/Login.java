@@ -37,6 +37,7 @@ public class Login extends HttpServlet {
 //		if(request.getSession(false)!=null) {
 //			request.getRequestDispatcher("/Accounts").forward(request, response);
 //		} else {
+		//this redirects users to the login HTML file
 			response.sendRedirect("http://localhost:8080/rocp-project/Login.html");
 		//}
 	}
@@ -50,27 +51,38 @@ public class Login extends HttpServlet {
 		
 		try {
 			UserDAOImpl udao = new UserDAOImpl();
+			//this draws the list of users
 			List<User> users = udao.selectAllUsers();
 			boolean allowed = false;
+			//this captures the username and password from the login form
 			String usernameinput = request.getParameter("username");
 			String passwordinput = request.getParameter("password");
 			if(users.size()>0) {
+				//this checks if the user account exist
 				for(User user : users ){{if(user.loginCheck(usernameinput,passwordinput)) allowed = true;}}
 			}
 			if(allowed) {
 				RoleDAOImpl rdao = new RoleDAOImpl();
 				AccountDAOImpl adao = new AccountDAOImpl();
+				//this gets the user entry based on the unique username and draws their information into an object
 				User u = udao.selectUserByUserName(usernameinput);
+				//this pulls the accounts that belong to the users
 				u.setAccounts(adao.selectAccountByOwner(u));
+				//this sets the role related to the database entry from the user entry to the user object
 				u.setRole(rdao.selectRoleById(u.getRole().getRoleId()));
+				
 				HttpSession session = request.getSession(); //Either return the current session or create a new session.
+				//this saves the user object in session memory
 				session.setAttribute("user", u);
+				//this sends the user request to the java file
 				response.sendRedirect("http://localhost:8080/rocp-project/Accounts");
 				
 			} else {
+				//this redirects users to the failed login HTML file
 				request.getRequestDispatcher("/FailedLogin.html").forward(request, response);
 			}
 		} catch (Exception e) {
+			//this redirects users to the failed login HTML file
 			request.getRequestDispatcher("/FailedLogin.html").forward(request, response);
 		}
 	}
