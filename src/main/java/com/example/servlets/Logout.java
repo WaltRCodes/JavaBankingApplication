@@ -29,6 +29,7 @@ public class Logout extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		PrintWriter pw = response.getWriter();
+		//this outputs a message when someone gets to the logout screen
 		pw.write("<p>You have logged out</p>");
 		
 	}
